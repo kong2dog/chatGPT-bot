@@ -10,6 +10,7 @@ export async function requestOpenai(req: NextRequest) {
   const openaiPath = req.headers.get("path");
 
   let baseUrl = BASE_URL;
+  console.log(baseUrl, apiKey);
 
   if (!baseUrl.startsWith("http")) {
     baseUrl = `${PROTOCOL}://${baseUrl}`;
