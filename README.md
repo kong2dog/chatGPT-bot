@@ -19,3 +19,6 @@ One-Click to deploy well-designed ChatGPT web UI on Vercel.
 - Automatically compresses chat history to support long conversations while also saving your tokens
 - One-click export all chat history with full Markdown support
 - I18n supported
+
+
+pm2 start yarn --name "chatgpt" -- start
