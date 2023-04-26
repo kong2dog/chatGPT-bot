@@ -1,15 +1,44 @@
 .window-header {
   padding: 14px 20px;
-  border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
+  border: none;
   position: relative;
-
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.window-header-main-title{
+  
+}
+
+.window-header-hide{
+  margin-top: -240px;
+}
+
+.window-header-title{
+  font-family: 'Microsoft YaHei UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 76px;
+
+  /* Grey/Grey 800 */
+
+  color: #2E3742;
+  white-space: nowrap;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  span{
+    color: #E72520;
+  }
+}
 
 .window-header-title {
-  max-width: calc(100% - 100px);
   overflow: hidden;
 
   .window-header-main-title {

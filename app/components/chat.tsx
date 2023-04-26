@@ -8,6 +8,7 @@ import ExportIcon from "../icons/share.svg";
 import ReturnIcon from "../icons/return.svg";
 import CopyIcon from "../icons/copy.svg";
 import DownloadIcon from "../icons/download.svg";
+import MainLogo from "../icons/mainlogo.svg";
 import LoadingIcon from "../icons/three-dots.svg";
 import BotIcon from "../icons/bot.svg";
 import BlackBotIcon from "../icons/black-bot.svg";
@@ -405,7 +406,7 @@ export function ChatActions(props: {
         </div>
       )}
 
-      <div
+      {/*<div
         className={`${chatStyle["chat-input-action"]} clickable`}
         onClick={nextTheme}
       >
@@ -416,7 +417,7 @@ export function ChatActions(props: {
         ) : theme === Theme.Dark ? (
           <DarkIcon />
         ) : null}
-      </div>
+      </div>*/}
     </div>
   );
 }
@@ -435,6 +436,7 @@ export function Chat() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [userInput, setUserInput] = useState("");
   const [beforeInput, setBeforeInput] = useState("");
+  const [isWriting, setIsWriting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { submitKey, shouldSubmit } = useSubmitHandler();
   const { scrollRef, setAutoScroll, scrollToBottom } = useScrollToBottom();
@@ -490,7 +492,7 @@ export function Chat() {
   const onInput = (text: string) => {
     setUserInput(text);
     const n = text.trim().length;
-
+    setIsWriting(true);
     // clear search results
     if (n === 0) {
       setPromptHints([]);
@@ -648,19 +650,24 @@ export function Chat() {
 
   return (
     <div className={styles.chat} key={session.id}>
-      <div className={styles["window-header"]}>
-        <div className={styles["window-header-title"]}>
+      <div
+        className={
+          styles["window-header"] +
+          ` ${isWriting ? styles["window-header-hide"] : ""}`
+        }
+      >
+        <div>
           <div
             className={`${styles["window-header-main-title"]} ${styles["chat-body-title"]}`}
             onClickCapture={renameSession}
           >
-            {session.topic}
+            <MainLogo />
           </div>
-          <div className={styles["window-header-sub-title"]}>
-            {Locale.Chat.SubTitle(session.messages.length)}
+          <div className={styles["window-header-title"]}>
+            欢迎使用禹数<span>GPT</span>
           </div>
         </div>
-        <div className={styles["window-actions"]}>
+        {/*<div className={styles["window-actions"]}>
           <div className={styles["window-action-button"] + " " + styles.mobile}>
             <IconButton
               icon={<ReturnIcon />}
@@ -702,13 +709,13 @@ export function Chat() {
               />
             </div>
           )}
-        </div>
+        </div>*/}
 
-        <PromptToast
+        {/* <PromptToast
           showToast={!hitBottom}
           showModal={showPromptModal}
           setShowModal={setShowPromptModal}
-        />
+        />*/}
       </div>
 
       <div
@@ -738,9 +745,6 @@ export function Chat() {
               }
             >
               <div className={styles["chat-message-container"]}>
-                <div className={styles["chat-message-avatar"]}>
-                  <Avatar role={message.role} model={message.model} />
-                </div>
                 {showTyping && (
                   <div className={styles["chat-message-status"]}>
                     {Locale.Chat.Typing}

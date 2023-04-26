@@ -7,8 +7,10 @@ import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
 import AddIcon from "../icons/add.svg";
+import PlusIcon from "../icons/plus.svg";
 import CloseIcon from "../icons/close.svg";
 import Locale from "../locales";
+import Logo from "../icons/logo.svg";
 
 import { useAppConfig, useChatStore } from "../store";
 
@@ -90,13 +92,26 @@ export function SideBar(props: { className?: string }) {
       }`}
     >
       <div className={styles["sidebar-header"]}>
-        <div className={styles["sidebar-title"]}>ChatGPT Next</div>
-        <div className={styles["sidebar-sub-title"]}>
+        <div className={styles["sidebar-title"]}>
+          <Logo />
+        </div>
+        <div>
+          <IconButton
+            className={styles["no-border-radius"]}
+            icon={<PlusIcon />}
+            text={shouldNarrow ? undefined : Locale.Home.NewChat}
+            onClick={() => {
+              chatStore.newSession();
+            }}
+            shadow
+          />
+        </div>
+        {/*        <div className={styles["sidebar-sub-title"]}>
           Build your own AI assistant.
         </div>
         <div className={styles["sidebar-logo"]}>
           <ChatGptIcon />
-        </div>
+        </div>*/}
       </div>
 
       <div
@@ -110,7 +125,7 @@ export function SideBar(props: { className?: string }) {
         <ChatList narrow={shouldNarrow} />
       </div>
 
-      <div className={styles["sidebar-tail"]}>
+      {/*<div className={styles["sidebar-tail"]}>
         <div className={styles["sidebar-actions"]}>
           <div className={styles["sidebar-action"] + " " + styles.mobile}>
             <IconButton
@@ -124,17 +139,8 @@ export function SideBar(props: { className?: string }) {
             </Link>
           </div>
         </div>
-        <div>
-          <IconButton
-            icon={<AddIcon />}
-            text={shouldNarrow ? undefined : Locale.Home.NewChat}
-            onClick={() => {
-              chatStore.newSession();
-            }}
-            shadow
-          />
-        </div>
-      </div>
+        
+      </div>*/}
 
       <div
         className={styles["sidebar-drag"]}
